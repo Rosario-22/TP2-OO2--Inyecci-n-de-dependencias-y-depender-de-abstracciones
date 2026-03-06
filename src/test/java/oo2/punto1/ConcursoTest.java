@@ -24,8 +24,21 @@ public class ConcursoTest {
         assertEquals(10, participante.getCantidadDePuntos());
     }
 
+    //2. Prueba para verificar si un participante intenta inscribirse fuera del período de inscripción y se muestra el mensaje.
+    @Test
+    public void testInscripcionFueraDePeriodo() {
+        // Arrange
+        Concurso concurso = new Concurso(LocalDate.of(2024, 1, 1), LocalDate.of(2024, 1, 10));
+        Participante participante = new Participante("Maria", 0);
+        LocalDate fechaInscripcion = LocalDate.of(2024, 1, 11); // Fecha fuera del período de inscripción
+        // Act
+        boolean resultado = concurso.inscribirParticipante(participante, fechaInscripcion);
+        // Assert
+        assertTrue(!resultado);
+    }
 
-    //2. prueba para verificar que el método cantidadParticipantes() devuelve el número correcto de participantes.
+    
+    //3. prueba para verificar que el método cantidadParticipantes() devuelve el número correcto de participantes.
     @Test
     public void testCantidadParticipantes() {
         // Arrange
@@ -41,7 +54,7 @@ public class ConcursoTest {
     }
 
 
-    //3. prueba para verificar que el método obtenerGanador() 
+    //4. prueba para verificar que el método obtenerGanador() 
     // devuelve al participante con la mayor cantidad de puntos como ganador.
     @Test
     public void testObtenerGanador() {

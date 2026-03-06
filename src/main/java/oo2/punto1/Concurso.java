@@ -18,7 +18,12 @@ public class Concurso {
     //metodo para inscribir a un participante en el concurso, 
     //verificando que la fecha de inscripción sea válida y otorgando puntos si se inscribe el primer día
     public boolean inscribirParticipante(Participante participante, LocalDate fechaActualInscripcion){
-         if (fechaActualInscripcion.isBefore(fechaInicio) || fechaActualInscripcion.isAfter(fechaFin)) {
+        //Verifico si ya pasó la fecha de inscripción, si es así, muestro un mensaje. 
+        if(fechaActualInscripcion.isAfter(fechaFin)){
+            System.out.println("El período de inscripción ha finalizado.");
+            return false;
+        } 
+        if (fechaActualInscripcion.isBefore(fechaInicio)) {
             return false;
         }
         participantes.add(participante);
@@ -27,6 +32,7 @@ public class Concurso {
         }
         return true;
     }
+
    // Método para obtener la cantidad de paeticipantes inscritos en el concurso
     public int cantidadParticipantes() {
     return participantes.size();
