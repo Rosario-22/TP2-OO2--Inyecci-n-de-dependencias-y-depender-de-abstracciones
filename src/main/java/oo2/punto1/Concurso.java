@@ -17,20 +17,18 @@ public class Concurso {
 
     //metodo para inscribir a un participante en el concurso, 
     //verificando que la fecha de inscripción sea válida y otorgando puntos si se inscribe el primer día
-    public boolean inscribirParticipante(Participante participante, LocalDate fechaActualInscripcion){
+    public void  inscribirParticipante(Participante participante, LocalDate fechaActualInscripcion) throws ValidacionFechaException {
         //Verifico si ya pasó la fecha de inscripción, si es así, muestro un mensaje. 
         if(fechaActualInscripcion.isAfter(fechaFin)){
-            System.out.println("El período de inscripción ha finalizado.");
-            return false;
+            throw new ValidacionFechaException("La fecha de inscripción del concurso ha finalizado.");
         } 
         if (fechaActualInscripcion.isBefore(fechaInicio)) {
-            return false;
+            throw new ValidacionFechaException("Aún no comienza el período de inscripción al concurso.");
         }
         participantes.add(participante);
         if (fechaActualInscripcion.isEqual(fechaInicio)) {
             participante.ganarPuntos(10);
         }
-        return true;
     }
 
    // Método para obtener la cantidad de paeticipantes inscritos en el concurso
@@ -46,7 +44,7 @@ public class Concurso {
     //Metodo para obtener al ganador del concurso,(el que contenga màs puntos)
     public Participante obtenerGanador() {
        return participantes.stream()
-        .max(Comparator.comparingInt(Participante::getCantidadDePuntos))
+        .max(Comparator.comparingInt(Participante::cantidadDePuntos))
         .orElse(null);
     }
 }
