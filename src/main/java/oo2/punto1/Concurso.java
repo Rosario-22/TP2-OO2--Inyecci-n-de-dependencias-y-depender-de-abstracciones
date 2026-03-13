@@ -17,7 +17,7 @@ public class Concurso {
 
     //metodo para inscribir a un participante en el concurso, 
     //verificando que la fecha de inscripción sea válida y otorgando puntos si se inscribe el primer día
-    public void  inscribirParticipante(Participante participante, LocalDate fechaActualInscripcion) throws ValidacionFechaException {
+    public void  inscribirParticipante(Participante participante, LocalDate fechaActualInscripcion){
         //Verifico si ya pasó la fecha de inscripción, si es así, muestro un mensaje. 
         if(fechaActualInscripcion.isAfter(fechaFin)){
             throw new ValidacionFechaException("La fecha de inscripción del concurso ha finalizado.");

@@ -26,10 +26,10 @@ public class Participante {
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null || getClass() != obj.getClass())
-            return false;
+        if (this == obj) {
+            return true;}
+        if ((obj == null) || (getClass() != obj.getClass())){
+            return false;}
         Participante other = (Participante) obj;
         return nombre.equals(other.nombre);
     }

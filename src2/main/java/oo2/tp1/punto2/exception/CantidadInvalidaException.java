@@ -1,0 +1,9 @@
+package oo2.tp1.punto2.exception;
+
+//La cantidad debe ser mayor a 0
+public class CantidadInvalidaException extends Exception {
+    public CantidadInvalidaException(String message) {
+        super(message);
+    }
+    
+}
