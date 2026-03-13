@@ -6,7 +6,7 @@ public abstract class ProductoAbstract {
     private String nombre;
     private double precio;
     
-    public ProductoAbstract(String nombre, double precio) throws PrecioInvalidoException {
+    public ProductoAbstract(String nombre, double precio) {
         if (precio <= 0) {
             throw new PrecioInvalidoException("El precio debe ser mayor a 0");
         }

@@ -14,14 +14,14 @@ public class Pedido {
         this.confirmado = confirmado;
     }
 
-    public void agregarItem(ItemPedido item) throws PedidoConfirmadoException {
+    public void agregarItem(ItemPedido item) {
         if (confirmado) {
             throw new PedidoConfirmadoException("No se pueden agregar items a un pedido confirmado");
         }
             items.add(item);
     }
 
-    public void confirmarPedido() throws PedidoVacioException {
+    public void confirmarPedido()  {
         if (items.isEmpty()) {
             throw new PedidoVacioException("No se puede confirmar un pedido vacío");
         }
