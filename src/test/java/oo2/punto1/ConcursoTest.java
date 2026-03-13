@@ -13,7 +13,7 @@ public class ConcursoTest {
     //1. prueba para verificar que un participante se inscribe correctamente
     // en el concurso y recibe puntos si se inscribe el primer día.
     @Test
-    public void testInscripcionPrimerDia() throws ValidacionFechaException {
+    public void testInscripcionPrimerDia() {
         // Arrange
         Concurso concurso = new Concurso(LocalDate.of(2024,1,1), LocalDate.of(2024,1,10));
         Participante participante = new Participante("Romina",0);
@@ -27,7 +27,7 @@ public class ConcursoTest {
 
     //2. Prueba para verificar si un participante intenta inscribirse fuera del período de inscripción y se lanza la excepcion.
     @Test
-    public void testInscripcionFueraDePeriodo() throws ValidacionFechaException {
+    public void testInscripcionFueraDePeriodo() {
         // Arrange
         Concurso concurso = new Concurso(LocalDate.of(2024,1,1), LocalDate.of(2024,1,10));
         Participante participante = new Participante("Maria",0);
@@ -40,7 +40,7 @@ public class ConcursoTest {
 
     //3. Prueba para verificar si un particvipante intenta inscribirse antes del inicio del período de inscripción y se lanza la excepcion. 
     @Test
-    public void testInscripcionAntesDePeriodo() throws ValidacionFechaException {
+    public void testInscripcionAntesDePeriodo() {
         // Arrange
         Concurso concurso = new Concurso(LocalDate.of(2024,1,2), LocalDate.of(2024,1,10));
         Participante participante = new Participante("Ana",0);
@@ -53,7 +53,7 @@ public class ConcursoTest {
 
     //4. prueba para verificar que el método cantidadParticipantes() devuelve el número correcto de participantes.
     @Test
-    public void testCantidadParticipantes() throws ValidacionFechaException {
+    public void testCantidadParticipantes() {
         // Arrange
         Concurso concurso = new Concurso(LocalDate.of(2024, 1, 1), LocalDate.of(2024, 1, 10));
         Participante participante1 = new Participante("Juan", 0);
@@ -69,7 +69,7 @@ public class ConcursoTest {
     //5. prueba para verificar que el método obtenerGanador() 
     // devuelve al participante con la mayor cantidad de puntos como ganador.
     @Test
-    public void testObtenerGanador() throws ValidacionFechaException {
+    public void testObtenerGanador() {
         // Arrange
         Concurso concurso = new Concurso(LocalDate.of(2024, 1, 2), LocalDate.of(2024, 1, 10));
         Participante participante1 = new Participante("Juan", 0);
@@ -83,3 +83,5 @@ public class ConcursoTest {
         assertEquals("Juan", ganador.nombre());
     }
 }
+//DUDAS:
+//EN QUÉ TEST DEBO INGRESAR LA FECHA EN EL MOMENTO EN VEZ DE INGRESARLA MANUALMENTE??

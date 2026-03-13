@@ -1,4 +1,4 @@
-package oo2.tp1.punto2;
+package oo2.punto2;
 
 public class Bebida extends ProductoAbstract {
     private double cantidadLitros; 

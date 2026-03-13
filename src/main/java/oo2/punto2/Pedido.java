@@ -1,27 +1,31 @@
-package oo2.tp1.punto2;
+package oo2.punto2;
 
+import java.util.ArrayList;
 import java.util.List;
 
-import oo2.tp1.punto2.exception.PedidoConfirmadoException;
-import oo2.tp1.punto2.exception.PedidoVacioException;
+import oo2.punto2.exception.PedidoConfirmadoException;
+import oo2.punto2.exception.PedidoVacioException;
 
 public class Pedido {
+
     private List<ItemPedido> items;
     private boolean confirmado;
+    TarjetaCreditoAbstract tarjeta;
+    PropinaEnum propina; 
 
-    public Pedido(List<ItemPedido> items, boolean confirmado) {
-        this.items = items;
-        this.confirmado = confirmado;
+    public Pedido() {
+        this.items = new ArrayList<>();
+        this.confirmado = false;
     }
 
     public void agregarItem(ItemPedido item) {
         if (confirmado) {
             throw new PedidoConfirmadoException("No se pueden agregar items a un pedido confirmado");
         }
-            items.add(item);
+        items.add(item);
     }
 
-    public void confirmarPedido()  {
+    public void confirmarPedido() {
         if (items.isEmpty()) {
             throw new PedidoVacioException("No se puede confirmar un pedido vacío");
         }
@@ -43,8 +47,10 @@ public class Pedido {
     }
 
     public double calcularTotal() {
-        return calcularSubtotalBebidas() + calcularSubtotalPlatos();
+        return tarjeta.calcularDescuento(this);
     }
 
-
+    public void elegirPropina(PropinaEnum propina)  {
+        this.propina = propina; 
+    }
 }

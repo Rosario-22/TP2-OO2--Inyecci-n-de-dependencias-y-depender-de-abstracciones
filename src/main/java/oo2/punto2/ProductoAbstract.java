@@ -1,6 +1,6 @@
-package oo2.tp1.punto2;
+package oo2.punto2;
 
-import oo2.tp1.punto2.exception.PrecioInvalidoException;
+import oo2.punto2.exception.PrecioInvalidoException;
 
 public abstract class ProductoAbstract {
     private String nombre;

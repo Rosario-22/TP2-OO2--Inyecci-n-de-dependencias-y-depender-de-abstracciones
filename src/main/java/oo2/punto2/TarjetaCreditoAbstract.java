@@ -1,4 +1,4 @@
-package oo2.tp1.punto2;
+package oo2.punto2;
 
 public abstract class TarjetaCreditoAbstract {
     //Este metodo se implementara en el caso que las tarjetas no sean ni visa, ni master o comarcaPlus.

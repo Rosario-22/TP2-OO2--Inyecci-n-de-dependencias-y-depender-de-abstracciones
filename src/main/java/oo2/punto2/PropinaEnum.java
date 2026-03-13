@@ -1,4 +1,4 @@
-package oo2.tp1.punto2;
+package oo2.punto2;
 
 public enum PropinaEnum {
     DOS(0.02),
@@ -11,8 +11,8 @@ public enum PropinaEnum {
         this.porcentaje = porcentaje;
     }
 
-    public double getPorcentaje() {
-        return porcentaje;
+     public double calcularSobre(double monto) {
+        return monto * porcentaje;
     }
 }
  
