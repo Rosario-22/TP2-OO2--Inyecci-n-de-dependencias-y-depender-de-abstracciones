@@ -3,9 +3,12 @@ package oo2.punto2;
 total de las bebidas. */
 
 public class Visa extends TarjetaCreditoAbstract {
+
+    private static final double DESCUENTO = 0.03;
+
     public double calcularDescuento(Pedido pedido) {
         double total = pedido.calcularSubtotalBebidas() + pedido.calcularSubtotalPlatos();
-        double descuento = pedido.calcularSubtotalBebidas() * 0.03;
-        return total - descuento;
+        double des = pedido.calcularSubtotalBebidas() * DESCUENTO;
+        return total - des;
     }
 }
