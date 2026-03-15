@@ -1,6 +1,5 @@
 package oo2.punto2;
 
-
 public class Mesa{
     private int cantidadDeSillas;
     private boolean estaDisponible;
@@ -20,7 +19,7 @@ public class Mesa{
         return estaDisponible;
     }
 
-    public Pedido getPedido() {
+    public Pedido saberPedido() {
         return pedido;
     }
 }

@@ -14,11 +14,11 @@ public abstract class ProductoAbstract {
         this.precio = precio;
     }
     
-    public String getNombre() {
+    private String obtenerNombre() {
         return nombre;
     }
     
-    public double getPrecio() {
+    private double obtenerPrecio() {
         return precio;
     }
 
