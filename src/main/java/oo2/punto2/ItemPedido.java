@@ -1,12 +1,12 @@
 package oo2.punto2;
-
 import oo2.punto2.exception.CantidadInvalidaException;
 
 public class ItemPedido {
-    private ProductoAbstract producto;
+
+    private Producto producto;
     private int cantidad;
 
-    public ItemPedido(ProductoAbstract producto, int cantidad){
+    public ItemPedido(Producto producto, int cantidad){
         if (cantidad <= 0) {
             throw new CantidadInvalidaException("La cantidad debe ser mayor a 0");
         }
@@ -15,15 +15,14 @@ public class ItemPedido {
     }
 
     public double calcularSubtotal() {
-        return producto.getPrecio() * cantidad;
+        return producto.obtenerPrecio() * cantidad;
     }
 
-    public ProductoAbstract obtenerProducto() {
-        return producto;
+    public double calcularSubtotalBebidas() {
+        return producto.calcularSubtotalBebida(cantidad);
     }
 
-    public int obtenerCantidad() {
-        return cantidad;
+    public double calcularSubtotalPlatos() {
+        return producto.calcularSubtotalPlato(cantidad);
     }
-
 }

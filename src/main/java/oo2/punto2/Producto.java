@@ -2,31 +2,21 @@ package oo2.punto2;
 
 import oo2.punto2.exception.PrecioInvalidoException;
 
-public abstract class ProductoAbstract {
+public abstract class Producto {
     private String nombre;
     private double precio;
     
-    public ProductoAbstract(String nombre, double precio) {
+    public Producto(String nombre, double precio) {
         if (precio <= 0) {
             throw new PrecioInvalidoException("El precio debe ser mayor a 0");
         }
         this.nombre = nombre;
         this.precio = precio;
     }
-    
-    private String obtenerNombre() {
-        return nombre;
-    }
-    
-    private double obtenerPrecio() {
+    double obtenerPrecio() {
         return precio;
     }
+    public abstract double calcularSubtotalBebida(int cantidad);
 
-    public boolean esBebida() {
-        return false;
-    }
-
-    public boolean esPlatoPrincipal() {
-        return false; 
-    }
+    public abstract double calcularSubtotalPlato(int cantidad);
 }

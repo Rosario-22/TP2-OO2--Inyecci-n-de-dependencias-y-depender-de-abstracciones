@@ -5,13 +5,12 @@ import java.util.List;
 
 import oo2.punto2.exception.PedidoConfirmadoException;
 import oo2.punto2.exception.PedidoVacioException;
-
 public class Pedido {
 
     private List<ItemPedido> items;
     private boolean confirmado;
-    TarjetaCreditoAbstract tarjeta;
-    PropinaEnum propina; 
+    TarjetaCredito tarjeta;
+    Propina propina; 
 
     public Pedido() {
         this.items = new ArrayList<>();
@@ -34,23 +33,25 @@ public class Pedido {
 
     public double calcularSubtotalBebidas() {
         return items.stream()
-                .filter(item -> item.obtenerProducto().esBebida())
-                .mapToDouble(ItemPedido::calcularSubtotal)
+                .mapToDouble(ItemPedido::calcularSubtotalBebidas)
                 .sum();
     }
 
     public double calcularSubtotalPlatos() {
         return items.stream()
-                .filter(item -> item.obtenerProducto().esPlatoPrincipal())
-                .mapToDouble(ItemPedido::calcularSubtotal)
+                .mapToDouble(ItemPedido::calcularSubtotalPlatos)
                 .sum();
     }
 
-    public double calcularTotal() {
-        return tarjeta.calcularDescuento(this);
+    double calcularTotalBruto(){
+        return calcularSubtotalBebidas() + calcularSubtotalPlatos();
     }
-
-    public void elegirPropina(PropinaEnum propina)  {
+    public void elegirPropina(Propina propina)  {
         this.propina = propina; 
+    }
+    public double calcularTotal() {
+        double totalConDescuento = tarjeta.calcularDescuento(this);
+        double propinaCalculada = propina.calcularSobre(totalConDescuento);
+        return totalConDescuento + propinaCalculada;
     }
 }

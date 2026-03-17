@@ -1,19 +1,21 @@
 package oo2.punto2;
 
-public class Bebida extends ProductoAbstract {
-    private double cantidadLitros; 
+public class Bebida extends Producto {
     
     public Bebida(String nombre, double precio, double cantidadLitros) {
         super(nombre, precio);
-        this.cantidadLitros = cantidadLitros;
-    }
-
-    public double obtenerCantidadDeLitros() {
-        return cantidadLitros;
     }
 
     @Override
-    public boolean esBebida() {
-        return true; 
+    public double calcularSubtotalBebida(int cantidad) {
+       return obtenerPrecio()* cantidad; 
     }
+
+    @Override
+    public double calcularSubtotalPlato(int cantidad) {
+        return 0; 
+    }
+
+    
+
 }
