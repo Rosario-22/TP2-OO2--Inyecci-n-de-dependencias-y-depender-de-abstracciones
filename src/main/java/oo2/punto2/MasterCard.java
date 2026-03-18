@@ -5,9 +5,8 @@ public class MasterCard extends TarjetaCredito {
    
     private static final double DESCUENTO = 0.02;
 
-    public double calcularDescuento(Pedido pedido) {
-        double subtotal=pedido.calcularTotalBruto();
-        double des= pedido.calcularSubtotalPlatos() * DESCUENTO;
-        return subtotal - des;
+    public double calcularDescuento(Pedido pedido, double totalconPropina) {
+        double des= pedido.calcularSubtotalPlatos() * DESCUENTO; 
+        return totalconPropina - des;
     }
 }

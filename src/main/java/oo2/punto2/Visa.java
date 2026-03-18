@@ -6,9 +6,10 @@ public class Visa extends TarjetaCredito {
 
     private static final double DESCUENTO = 0.03;
 
-    public double calcularDescuento(Pedido pedido) {
-        double total = pedido.calcularTotalBruto();
-        double des = pedido.calcularSubtotalBebidas() * DESCUENTO;
-        return total - des;
+    @Override
+    public double calcularDescuento(Pedido pedido, double totalConPropina) {
+        double descuento = pedido.calcularSubtotalBebidas() * DESCUENTO;
+        return totalConPropina - descuento;
     }
 }
+

@@ -49,9 +49,13 @@ public class Pedido {
     public void elegirPropina(Propina propina)  {
         this.propina = propina; 
     }
-    public double calcularTotal() {
-        double totalConDescuento = tarjeta.calcularDescuento(this);
-        double propinaCalculada = propina.calcularSobre(totalConDescuento);
-        return totalConDescuento + propinaCalculada;
+
+    public double calcularTotal(TarjetaCredito tarjeta) {
+        double totalBruto = this.calcularTotalBruto();
+
+        double propinaCalculada = propina.calcularSobre(totalBruto);
+        double totalConPropina = totalBruto + propinaCalculada;
+
+        return tarjeta.calcularDescuento(this, totalConPropina);
     }
 }

@@ -5,7 +5,8 @@ public class ComarcaPlus extends TarjetaCredito{
    
     private static final double DESCUENTO = 0.02;
 
-    public double calcularDescuento(Pedido pedido) {
-        return pedido.calcularTotalBruto()* DESCUENTO;
+    public double calcularDescuento(Pedido pedido, double totalconPropina) {
+        double des = pedido.calcularTotalBruto() * DESCUENTO;
+        return totalconPropina - des; 
     }
 }
