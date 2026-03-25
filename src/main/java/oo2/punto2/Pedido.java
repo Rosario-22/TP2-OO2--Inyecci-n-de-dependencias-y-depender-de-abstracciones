@@ -1,5 +1,6 @@
 package oo2.punto2;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,10 +12,12 @@ public class Pedido {
     private boolean confirmado;
     TarjetaCredito tarjeta;
     Propina propina; 
+    RegistroCena registro; 
 
-    public Pedido() {
+    public Pedido(RegistroCena registro) {
         this.items = new ArrayList<>();
         this.confirmado = false;
+        this.registro= registro; 
     }
 
     public void agregarItem(ItemPedido item) {
@@ -52,10 +55,12 @@ public class Pedido {
 
     public double calcularTotal(TarjetaCredito tarjeta) {
         double totalBruto = this.calcularTotalBruto();
-
         double propinaCalculada = propina.calcularSobre(totalBruto);
         double totalConPropina = totalBruto + propinaCalculada;
+        double totalFinal = tarjeta.calcularDescuento(this, totalConPropina);
 
-        return tarjeta.calcularDescuento(this, totalConPropina);
+        registro.guardar(LocalDate.now(), totalFinal);
+
+        return totalFinal;
     }
 }

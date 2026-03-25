@@ -9,9 +9,10 @@ public class TarjetaTest {
     @Test 
     public void calculoCostoVisa()  {
         //Arrange
+        RegistroCenaFake registro = new RegistroCenaFake(); 
         Producto coca = new Bebida("COCA-COLA", 2500, 750);
         Producto milanesa = new PlatoPrincipal("milanesa con papas al horno", 6000);
-        Pedido mesaPedido = new Pedido(); 
+        Pedido mesaPedido = new Pedido(registro); 
         ItemPedido platoPpal = new ItemPedido(milanesa, 2);
         ItemPedido bebida = new ItemPedido(coca, 4);
         mesaPedido.agregarItem(platoPpal);
@@ -24,14 +25,16 @@ public class TarjetaTest {
         //assert
         //tarjeta visa (5% propina, 3% bebidas)
         assertEquals(22800, total, 0.1);
+        assertEquals(1, registro.registrosGuardados().size());
     }
 
     @Test
     public void calculoCostoMaster() {
         //arrange
+        RegistroCenaFake registro= new RegistroCenaFake(); 
         Producto bebida = new Bebida("Fanta", 2500, 750);
         Producto platoPpal = new PlatoPrincipal("fideos a la crema", 6000);
-        Pedido mesaPedido = new Pedido(); 
+        Pedido mesaPedido = new Pedido(registro); 
         ItemPedido item = new ItemPedido(platoPpal, 2);
         ItemPedido item1= new ItemPedido(bebida, 4);
         mesaPedido.agregarItem(item);
@@ -44,14 +47,16 @@ public class TarjetaTest {
         //assert
         //tarjeta master card (2% propina, 2% platos)
         assertEquals(22200, total, 0.1);
+        assertEquals(1, registro.registrosGuardados().size());
     }
 
     @Test
     public void calculoCostoComarca() {
         //arrange
+        RegistroCenaFake registro = new RegistroCenaFake();
         Producto bebida = new Bebida("Vino", 2500, 750);
         Producto platoPpal = new PlatoPrincipal("Lomo al plato con guarnición", 6000);
-        Pedido mesaPedido = new Pedido(); 
+        Pedido mesaPedido = new Pedido(registro); 
         ItemPedido item1 = new ItemPedido(bebida, 2);
         ItemPedido item2 = new ItemPedido(platoPpal, 4);
         mesaPedido.agregarItem(item1);
@@ -64,14 +69,16 @@ public class TarjetaTest {
         //assert
         //tarjeta comarca plus (3% propina, 2% total)
         assertEquals(29290, total, 0.1);
+        assertEquals(1, registro.registrosGuardados().size());
     }
 
     @Test
     public void costotarjetaViedma() {
         //arrange
+        RegistroCenaFake registro = new RegistroCenaFake(); 
         Producto bebida = new Bebida("Vino", 2500, 750);
         Producto platoPpal = new PlatoPrincipal("Lomo al plato con guarnición", 6000);
-        Pedido mesaPedido = new Pedido(); 
+        Pedido mesaPedido = new Pedido(registro); 
         ItemPedido item1 = new ItemPedido(bebida, 2);
         ItemPedido item2 = new ItemPedido(platoPpal, 4);
         mesaPedido.agregarItem(item1);
@@ -84,5 +91,6 @@ public class TarjetaTest {
         //assert
         // tarjeta viedma (3% propina, sin descuento)
         assertEquals(29870, total, 0.1);
+        assertEquals(1, registro.registrosGuardados().size()); 
     }
 }

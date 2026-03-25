@@ -8,8 +8,9 @@ public class PedidoTest {
     @Test
     public void testCalcularSubtotalParaUnaBebida() {
         //Configuracion
+        RegistroCenaFake registro = new RegistroCenaFake(); 
         Producto coca = new Bebida("Coca-cola", 2500, 0);
-        Pedido pedido = new Pedido();
+        Pedido pedido = new Pedido(registro);
         pedido.agregarItem(new ItemPedido(coca, 1));
 
         //Ejercitacion
@@ -22,8 +23,9 @@ public class PedidoTest {
     @Test
     public void testCalcularSubtotalParaDosBebidas() {
         //Configuracion
+        RegistroCenaFake registro = new RegistroCenaFake(); 
         Producto coca = new Bebida("Coca-cola", 2500, 0);
-        Pedido pedido = new Pedido();
+        Pedido pedido = new Pedido(registro);
         pedido.agregarItem(new ItemPedido(coca, 2));
 
         //Ejercitacion
@@ -35,9 +37,10 @@ public class PedidoTest {
     @Test
     public void testCalcularSubtotalParaVariasBebidas() {
         //Configuracion
+        RegistroCenaFake registro=new RegistroCenaFake();
         Producto coca = new Bebida("Coca-cola", 2500, 0);
         Producto fanta = new Bebida("Fanta", 3000, 0);
-        Pedido pedido = new Pedido();
+        Pedido pedido = new Pedido(registro);
         pedido.agregarItem(new ItemPedido(coca, 2));
         pedido.agregarItem(new ItemPedido(fanta, 2));
 
@@ -51,8 +54,9 @@ public class PedidoTest {
     @Test
     public void testCalcularSubtotalParaUnPlato() {
         //Configuracion
+        RegistroCenaFake registro = new RegistroCenaFake(); 
         Producto milanesa = new PlatoPrincipal("Milanesa con papas al horno", 6000);
-        Pedido pedido = new Pedido();
+        Pedido pedido = new Pedido(registro);
         pedido.agregarItem(new ItemPedido(milanesa, 1));
 
         //Ejercitacion
@@ -65,8 +69,9 @@ public class PedidoTest {
     @Test
     public void testCalcularSubtotalParaDosPlatos() {
         //Configuracion
+        RegistroCenaFake registro = new RegistroCenaFake(); 
         Producto milanesa = new PlatoPrincipal("Milanesa con papas al horno", 6000);
-        Pedido pedido = new Pedido();
+        Pedido pedido = new Pedido(registro);
         pedido.agregarItem(new ItemPedido(milanesa, 2));
 
         //Ejercitacion
@@ -79,9 +84,10 @@ public class PedidoTest {
     @Test
     public void testCalcularSubtotalParaVariosPlatos() {
         //Configuracion
+        RegistroCenaFake registro = new RegistroCenaFake(); 
         Producto milanesa = new PlatoPrincipal("Milanesa con papas al horno", 6000);
         Producto salmon = new PlatoPrincipal("Salmon ahumado", 10000);
-        Pedido pedido = new Pedido();
+        Pedido pedido = new Pedido(registro);
         pedido.agregarItem(new ItemPedido(milanesa, 2));
         pedido.agregarItem(new ItemPedido(salmon, 2));
         //Ejercitacion
