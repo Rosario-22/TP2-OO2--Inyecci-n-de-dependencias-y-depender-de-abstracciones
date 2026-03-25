@@ -1,18 +1,25 @@
 package oo2.punto1;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
 public class Concurso {
+    public static int contador= 0;
+    private int idConcurso; 
     private List<Participante> participantes= new ArrayList<>();
     private LocalDate fechaInicio;
     private LocalDate fechaFin;
+    RegistroInscripcion registro; 
    
-    public Concurso(LocalDate fechaInicio, LocalDate fechaFin) {
+    public Concurso(LocalDate fechaInicio, LocalDate fechaFin, RegistroInscripcion registro) {
+        contador++;
+        this.idConcurso=contador; 
         this.fechaInicio = fechaInicio;
         this.fechaFin = fechaFin;
+        this.registro = registro; 
     }
 
     //metodo para inscribir a un participante en el concurso, 
@@ -29,6 +36,11 @@ public class Concurso {
         if (fechaActualInscripcion.isEqual(fechaInicio)) {
             participante.ganarPuntos(10);
         }
+        DateTimeFormatter f = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        String linea = fechaActualInscripcion.format(f)
+                        + ", " + participante.id() 
+                        + ", " + this.idConcurso;        
+        registro.guardar(linea);
     }
 
    // Método para obtener la cantidad de paeticipantes inscritos en el concurso

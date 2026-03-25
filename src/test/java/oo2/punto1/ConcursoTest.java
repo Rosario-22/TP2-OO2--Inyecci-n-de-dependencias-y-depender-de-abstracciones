@@ -15,7 +15,8 @@ public class ConcursoTest {
     @Test
     public void testInscripcionPrimerDia() {
         // Arrange
-        Concurso concurso = new Concurso(LocalDate.of(2024,1,1), LocalDate.of(2024,1,10));
+        RegistroFake registro = new RegistroFake(); 
+        Concurso concurso = new Concurso(LocalDate.of(2024,1,1), LocalDate.of(2024,1,10), registro);
         Participante participante = new Participante("Romina",0);
         LocalDate fechaInscripcion = LocalDate.of(2024,1,1);
         // Act
@@ -23,39 +24,45 @@ public class ConcursoTest {
         // Assert
         assertTrue(concurso.estaInscripto(participante));
         assertEquals(10, participante.cantidadDePuntos());
+        assertEquals(1, registro.lineasGuardadas().size());
     }
 
     //2. Prueba para verificar si un participante intenta inscribirse fuera del período de inscripción y se lanza la excepcion.
     @Test
     public void testInscripcionFueraDePeriodo() {
         // Arrange
-        Concurso concurso = new Concurso(LocalDate.of(2024,1,1), LocalDate.of(2024,1,10));
+        RegistroFake registro = new RegistroFake(); 
+        Concurso concurso = new Concurso(LocalDate.of(2024,1,1), LocalDate.of(2024,1,10), registro);
         Participante participante = new Participante("Maria",0);
         LocalDate fechaInscripcion = LocalDate.of(2024,1,11);
         // Act + Assert
         ValidacionFechaException exception = assertThrows(ValidacionFechaException.class,
             () -> concurso.inscribirParticipante(participante, fechaInscripcion) );
         assertEquals("La fecha de inscripción del concurso ha finalizado.", exception.getMessage());
+        assertEquals(0, registro.lineasGuardadas().size());//valido que no se haya guardado nada 
     }
 
     //3. Prueba para verificar si un particvipante intenta inscribirse antes del inicio del período de inscripción y se lanza la excepcion. 
     @Test
     public void testInscripcionAntesDePeriodo() {
         // Arrange
-        Concurso concurso = new Concurso(LocalDate.of(2024,1,2), LocalDate.of(2024,1,10));
+        RegistroFake registro = new RegistroFake();
+        Concurso concurso = new Concurso(LocalDate.of(2024,1,2), LocalDate.of(2024,1,10), registro);
         Participante participante = new Participante("Ana",0);
         LocalDate fechaInscripcion = LocalDate.of(2024,1,1);
         // Act + Assert
         ValidacionFechaException exception = assertThrows( ValidacionFechaException.class,
             () -> concurso.inscribirParticipante(participante, fechaInscripcion) );
         assertEquals("Aún no comienza el período de inscripción al concurso.", exception.getMessage());
+        assertEquals(0, registro.lineasGuardadas().size());//valido que no se haya guardado nada 
     }
 
     //4. prueba para verificar que el método cantidadParticipantes() devuelve el número correcto de participantes.
     @Test
     public void testCantidadParticipantes() {
         // Arrange
-        Concurso concurso = new Concurso(LocalDate.of(2024, 1, 1), LocalDate.of(2024, 1, 10));
+        RegistroFake registro = new RegistroFake();
+        Concurso concurso = new Concurso(LocalDate.of(2024, 1, 1), LocalDate.of(2024, 1, 10), registro);
         Participante participante1 = new Participante("Juan", 0);
         Participante participante2 = new Participante("Maria", 0);
         concurso.inscribirParticipante(participante1, LocalDate.of(2024, 1, 1));
@@ -64,6 +71,7 @@ public class ConcursoTest {
         int cantidad = concurso.cantidadParticipantes();
         // Assert
         assertEquals(2, cantidad);
+        assertEquals(2, registro.lineasGuardadas().size());
     }
 
     //5. prueba para verificar que el método obtenerGanador() 
@@ -71,7 +79,8 @@ public class ConcursoTest {
     @Test
     public void testObtenerGanador() {
         // Arrange
-        Concurso concurso = new Concurso(LocalDate.of(2024, 1, 2), LocalDate.of(2024, 1, 10));
+        RegistroFake registro = new RegistroFake(); 
+        Concurso concurso = new Concurso(LocalDate.of(2024, 1, 2), LocalDate.of(2024, 1, 10), registro);
         Participante participante1 = new Participante("Juan", 0);
         Participante participante2 = new Participante("Maria", 0);
         concurso.inscribirParticipante(participante1, LocalDate.of(2024, 1, 2));
@@ -83,5 +92,3 @@ public class ConcursoTest {
         assertEquals("Juan", ganador.nombre());
     }
 }
-//DUDAS:
-//EN QUÉ TEST DEBO INGRESAR LA FECHA EN EL MOMENTO EN VEZ DE INGRESARLA MANUALMENTE??
